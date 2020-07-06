@@ -1,10 +1,7 @@
 package dbelousov.petprojects.collections;
 
-import dbelousov.petprojects.collections.HashTable;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
-import java.util.LinkedList;
 
 import static org.junit.jupiter.api.Assertions.*;
 
