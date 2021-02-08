@@ -4,17 +4,21 @@ import dbelousov.petprojects.collections.UnidirectionalNode;
 
 import java.util.ArrayDeque;
 
-public class LinkedListReverser<T> {
+public class LinkedListReverser {
 
-    public UnidirectionalNode<T> reverseLinkedListRecursively(UnidirectionalNode<T> head) {
+    public UnidirectionalNode<?> reverseLinkedListRecursively(UnidirectionalNode<?> head) {
+        return reverseLinkedListRecursivelyHelper(head);
+    }
+
+    private <T> UnidirectionalNode<T> reverseLinkedListRecursivelyHelper(UnidirectionalNode<T> head) {
         if (head != null) {
-            return reverseLinkedListRecursivelyHelper(head, head, head.getNext());
+            return reverseLinkedListRecursivelyImpl(head, head, head.getNext());
         }
 
         return null;
     }
 
-    private UnidirectionalNode<T> reverseLinkedListRecursivelyHelper(UnidirectionalNode<T> oldHead, UnidirectionalNode<T> curr, UnidirectionalNode<T> next) {
+    private <T> UnidirectionalNode<T> reverseLinkedListRecursivelyImpl(UnidirectionalNode<T> oldHead, UnidirectionalNode<T> curr, UnidirectionalNode<T> next) {
         // base case
         if (next == null) {
             oldHead.setNext(null);
@@ -24,18 +28,22 @@ public class LinkedListReverser<T> {
         UnidirectionalNode<T> oldNext = next.getNext();
         next.setNext(curr);
 
-        return reverseLinkedListRecursivelyHelper(oldHead, next, oldNext);
+        return reverseLinkedListRecursivelyImpl(oldHead, next, oldNext);
     }
 
-    public UnidirectionalNode<T> reverseLinkedListIteratively(UnidirectionalNode<T> head) {
+    public UnidirectionalNode<?> reverseLinkedListIteratively(UnidirectionalNode<?> head) {
+        return reverseLinkedListIterativelyHelper(head);
+    }
+
+    private <T> UnidirectionalNode<T> reverseLinkedListIterativelyHelper(UnidirectionalNode<T> head) {
         if (head != null) {
-            return reverseLinkedListIterativelyHelper(head, head.getNext());
+            return reverseLinkedListRecursivelyImpl(head, head, head.getNext());
         }
 
         return null;
     }
 
-    private UnidirectionalNode<T> reverseLinkedListIterativelyHelper(UnidirectionalNode<T> curr, UnidirectionalNode<T> next) {
+    private <T> UnidirectionalNode<T> reverseLinkedListIterativelyImpl(UnidirectionalNode<T> curr, UnidirectionalNode<T> next) {
         ArrayDeque<UnidirectionalNode<T>> stack = new ArrayDeque<>();
         stack.push(curr);
 
@@ -63,13 +71,13 @@ public class LinkedListReverser<T> {
         return newHead;
     }
 
-    public String listToString(UnidirectionalNode<T> head) {
+    public String listToString(UnidirectionalNode<?> head) {
         StringBuilder sb = new StringBuilder();
 
         sb.append("[ ");
         sb.append(head.getValue());
 
-        UnidirectionalNode<T> next = head.getNext();
+        UnidirectionalNode<?> next = head.getNext();
 
         while (next != null) {
             sb.append(" ");
