@@ -37,7 +37,7 @@ public class LinkedListReverser {
 
     private <T> UnidirectionalNode<T> reverseLinkedListIterativelyHelper(UnidirectionalNode<T> head) {
         if (head != null) {
-            return reverseLinkedListRecursivelyImpl(head, head, head.getNext());
+            return reverseLinkedListIterativelyImpl(head, head.getNext());
         }
 
         return null;
