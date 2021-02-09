@@ -47,4 +47,56 @@ public class UnidirectionalNode<T> {
     private boolean isValid(T value) {
         return value != null;
     }
+
+    public void orderOddFirst() {
+        int loi = getLastOddIndex();
+        int numOfSwaps = 0;
+
+        while (numOfSwaps < getLastOddIndex() / 2) {
+            insertAfterFirst(getItemAtIndex(loi - 1), getItemAtIndex(loi));
+            loi -= 1;
+            numOfSwaps++;
+        }
+    }
+
+    private int getLastOddIndex() {
+        UnidirectionalNode<T> curr = this;
+        int currIndex = 1;
+        int loi = 1;
+
+        while (curr != null) {
+            if (isOdd(currIndex)) {
+                loi = currIndex;
+            }
+            curr = curr.getNext();
+            currIndex++;
+        }
+
+        return loi;
+    }
+
+    private boolean isOdd(int value) {
+        return value % 2 != 0;
+    }
+
+    private UnidirectionalNode<T> getItemAtIndex(int ind) {
+        int currInd = 1;
+        UnidirectionalNode<T> curr = this;
+
+        while (curr != null) {
+            if (currInd == ind) {
+                return curr;
+            }
+            curr = curr.getNext();
+            currInd++;
+        }
+
+        return null;
+    }
+
+    private void insertAfterFirst(UnidirectionalNode<T> prev, UnidirectionalNode<T> curr) {
+        prev.setNext(curr.getNext());
+        curr.setNext(this.getNext());
+        this.setNext(curr);
+    }
 }

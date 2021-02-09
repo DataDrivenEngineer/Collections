@@ -10,11 +10,14 @@ class LinkedListReverserTest {
     private final LinkedListReverser linkedListReverser = new LinkedListReverser();
 
     private final UnidirectionalNode<Integer> testList = new UnidirectionalNode<>(
-            1,
-            new UnidirectionalNode<>(2,
+            2,
+            new UnidirectionalNode<>(1,
                     new UnidirectionalNode<>(3,
-                            new UnidirectionalNode<>(4,
-                                    new UnidirectionalNode<>(5, null))))
+                            new UnidirectionalNode<>(5,
+                                    new UnidirectionalNode<>(7,
+                                            new UnidirectionalNode<>(4,
+                                                    new UnidirectionalNode<>(6,
+                                                            new UnidirectionalNode<>(7,null)))))))
             );
 
     @Test
@@ -59,5 +62,12 @@ class LinkedListReverserTest {
     void testListRemoveLastElement() {
         System.out.println("In: " + linkedListReverser.listToString(testList));
         System.out.println("Out: " + linkedListReverser.listToString(testList.remove(5)));
+    }
+
+    @Test
+    void testOrderOddFirst() {
+        System.out.println("In: " + linkedListReverser.listToString(testList));
+        testList.orderOddFirst();
+        System.out.println("Out: " + linkedListReverser.listToString(testList));
     }
 }
