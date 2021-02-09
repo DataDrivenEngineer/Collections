@@ -42,4 +42,22 @@ class LinkedListReverserTest {
         UnidirectionalNode<?> reversedList = linkedListReverser.reverseLinkedListIteratively(testList);
         System.out.println("Out: " + linkedListReverser.listToString(reversedList));
     }
+
+    @Test
+    void testListRemoveMiddleElement() {
+        System.out.println("In: " + linkedListReverser.listToString(testList));
+        System.out.println("Out: " + linkedListReverser.listToString(testList.remove(3)));
+    }
+
+    @Test
+    void testListRemoveFirstElement() {
+        System.out.println("In: " + linkedListReverser.listToString(testList));
+        System.out.println("Out: " + linkedListReverser.listToString(testList.remove(1)));
+    }
+
+    @Test
+    void testListRemoveLastElement() {
+        System.out.println("In: " + linkedListReverser.listToString(testList));
+        System.out.println("Out: " + linkedListReverser.listToString(testList.remove(5)));
+    }
 }
