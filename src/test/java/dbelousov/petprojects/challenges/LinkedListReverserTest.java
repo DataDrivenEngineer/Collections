@@ -20,6 +20,17 @@ class LinkedListReverserTest {
                                                             new UnidirectionalNode<>(7,null)))))))
             );
 
+    private final UnidirectionalNode<Integer> palindromeList = new UnidirectionalNode<>(
+            1,
+            new UnidirectionalNode<>(2,
+                    new UnidirectionalNode<>(3,
+                            new UnidirectionalNode<>(4,
+                                    new UnidirectionalNode<>(4,
+                                            new UnidirectionalNode<>(3,
+                                                    new UnidirectionalNode<>(2,
+                                                            new UnidirectionalNode<>(1,null)))))))
+    );
+
     @Test
     void testListReverseRecursivelyNullList() {
         UnidirectionalNode<?> reversedList = linkedListReverser.reverseLinkedListRecursively(new UnidirectionalNode<>(null, null));
@@ -69,5 +80,10 @@ class LinkedListReverserTest {
         System.out.println("In: " + linkedListReverser.listToString(testList));
         testList.orderOddFirst();
         System.out.println("Out: " + linkedListReverser.listToString(testList));
+    }
+
+    @Test
+    void testIsPalindrome() {
+        assertTrue(palindromeList.isPalindrome());
     }
 }

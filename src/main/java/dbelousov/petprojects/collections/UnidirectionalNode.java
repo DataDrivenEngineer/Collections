@@ -26,6 +26,8 @@ public class UnidirectionalNode<T> {
         this.next = next;
     }
 
+    // region remove
+
     public UnidirectionalNode<T> remove(T value) {
         if (isValid(value)) {
             if (this.getValue().equals(value)) {
@@ -47,6 +49,10 @@ public class UnidirectionalNode<T> {
     private boolean isValid(T value) {
         return value != null;
     }
+
+    // endregion remove
+
+    // region orderOddFirst
 
     public void orderOddFirst() {
         int loi = getLastOddIndex();
@@ -99,4 +105,76 @@ public class UnidirectionalNode<T> {
         curr.setNext(this.getNext());
         this.setNext(curr);
     }
+
+    // endregion orderOddFirst
+
+    // region isPalindrome
+
+    public boolean isPalindrome() {
+        int size = getListSize();
+        if (isOdd(size)) {
+            return false;
+        }
+
+        int midIndex = size / 2;
+        UnidirectionalNode<T> midItem = getItemAtIndex(midIndex);
+        UnidirectionalNode<T> secondHead = midItem.getNext();
+        midItem.setNext(null);
+
+        UnidirectionalNode<T> reversedHead = reverse(); // reverse left half
+        boolean isPalindrome = compareLists(reversedHead, secondHead);
+        reverse(); // reverse left half back, restoring original list
+        midItem.setNext(secondHead);
+
+        return isPalindrome;
+    }
+
+    private int getListSize() {
+        int size = 0;
+        UnidirectionalNode<T> curr = this;
+
+        while (curr != null) {
+            size++;
+            curr = curr.getNext();
+        }
+
+        return size;
+    }
+
+    private boolean compareLists(UnidirectionalNode<T> one, UnidirectionalNode<T> two) {
+        UnidirectionalNode<T> currOne = one;
+        UnidirectionalNode<T> currTwo = two;
+
+        while (currOne != null && currTwo != null) {
+            if (currOne.getValue() != currTwo.getValue()) {
+                return false;
+            } else {
+                currOne = currOne.getNext();
+                currTwo = currTwo.getNext();
+            }
+        }
+
+        return true;
+    }
+
+    private UnidirectionalNode<T> reverse() {
+        UnidirectionalNode<T> prev = null;
+        UnidirectionalNode<T> curr = this;
+        UnidirectionalNode<T> next = null;
+        UnidirectionalNode<T> reversedHead = null;
+
+        while (curr != null) {
+            next = curr.getNext();
+            if (next == null) {
+                reversedHead = curr;
+            }
+            curr.setNext(prev);
+            prev = curr;
+            curr = next;
+        }
+
+        return reversedHead;
+    }
+
+    // endregion isPalindrome
 }
