@@ -1,4 +1,4 @@
-package dbelousov.petprojects.collections;
+package dbelousov.petprojects.collections.hashtable;
 
 class Node<K, V> {
 

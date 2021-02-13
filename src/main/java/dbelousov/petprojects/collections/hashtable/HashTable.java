@@ -1,4 +1,4 @@
-package dbelousov.petprojects.collections;
+package dbelousov.petprojects.collections.hashtable;
 
 import java.util.ArrayList;
 import java.util.LinkedList;

@@ -1,5 +1,6 @@
 package dbelousov.petprojects.collections;
 
+import dbelousov.petprojects.collections.hashtable.HashTable;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
