@@ -24,4 +24,8 @@ public class TreeNode<T> {
     public List<TreeNode<T>> getChildren() {
         return children;
     }
+
+    public boolean hasChildren() {
+        return !children.isEmpty();
+    }
 }

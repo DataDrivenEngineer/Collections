@@ -46,4 +46,9 @@ class TreeUtilsTest {
     void testLevelOrderTraverseRecursively() {
         TreeUtils.levelOrderTraverseRecursively(treeInt);
     }
+
+    @Test
+    void testInOrderTraverseIteratively() {
+        TreeUtils.inOrderTraverseIteratively(treeInt);
+    }
 }
