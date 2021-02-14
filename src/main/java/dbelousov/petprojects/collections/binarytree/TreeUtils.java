@@ -1,8 +1,6 @@
 package dbelousov.petprojects.collections.binarytree;
 
-import java.util.ArrayDeque;
-import java.util.Deque;
-import java.util.List;
+import java.util.*;
 
 public class TreeUtils {
 
@@ -38,70 +36,110 @@ public class TreeUtils {
         System.out.println(root.getValue());
     }
 
-    public static <T> void levelOrderTraverseRecursively(TreeNode<T> root) {
-        ArrayDeque<T> queue = new ArrayDeque<>();
-        queue.add(root.getValue());
-        traverse(root, queue);
-        printQueue(queue);
-    }
-
-    private static <T> void traverse(TreeNode<T> root, ArrayDeque<T> q) {
-        List<TreeNode<T>> children = root.getChildren();
-
-        for (TreeNode<T> child : children) {
-            q.add(child.getValue());
-        }
-
-        for (TreeNode<T> child : children) {
-            traverse(child, q);
-        }
-    }
-
-    private static <T> void printQueue(ArrayDeque<T> q) {
-        while (q.peek() != null) {
-            System.out.println(q.poll());
-        }
-    }
-
     // endregion recursively
 
     // region iteratively
 
-    public static <T> void inOrderTraverseIteratively(TreeNode<T> root) {
+    public static <T> void preOrderTraverseIteratively(TreeNode<T> root) {
         Deque<TreeNode<T>> stack = new ArrayDeque<>();
         stack.push(root);
 
-        // Traverse and print left branch
-        traverseBranch(stack);
-        printBranch(stack);
-
-        // Traverse and print right branch
-        traverseBranch(stack);
-        printBranch(stack);
-        // Print last node
-        System.out.println(stack.pop().getValue());
-    }
-
-    private static <T> void traverseBranch(Deque<TreeNode<T>> stack) {
-        TreeNode<T> node = null;
-
-        do {
-            node = stack.pop();
-            if (node.hasChildren()) {
-                List<TreeNode<T>> children = node.getChildren();
-                stack.push(children.get(1));
-                stack.push(node);
-                stack.push(children.get(0));
-            } else {
-                stack.push(node);
-            }
-        } while (node.hasChildren());
-    }
-
-    private static <T> void printBranch(Deque<TreeNode<T>> stack) {
-        while (stack.size() > 1) {
+        while (stack.size() > 0) {
             TreeNode<T> node = stack.pop();
             System.out.println(node.getValue());
+            for (TreeNode<T> child : reverse(node.getChildren())) {
+                stack.push(child);
+            }
+        }
+    }
+
+    private static <T> List<TreeNode<T>> reverse(List<TreeNode<T>> in) {
+        List<TreeNode<T>> out = new ArrayList<>();
+
+        for (int i = in.size() - 1; i >= 0; i--) {
+            out.add(in.get(i));
+        }
+
+        return out;
+    }
+
+    public static <T> void postOrderTraverseIteratively(TreeNode<T> root) {
+        var stack = new ArrayDeque<TreeNode<T>>();
+        stack.push(root);
+
+        var visited = new HashMap<TreeNode<T>, Boolean>();
+
+        while (stack.size() > 0) {
+            var node = stack.peek();
+            if (node.hasChildren() && !visited.containsKey(node)) {
+                for (var child : reverse(node.getChildren())) {
+                    stack.push(child);
+                    visited.put(node, true);
+                }
+            } else {
+                System.out.println(node.getValue());
+                stack.pop();
+            }
+        }
+    }
+
+    public static <T> void inOrderTraverseIteratively(TreeNode<T> root) {
+        var stack = new ArrayDeque<TreeNode<T>>();
+        stack.push(root);
+
+        var visited = new HashMap<TreeNode<T>, Boolean>();
+
+        while (stack.size() > 0) {
+            var node = stack.pop();
+            if (node.hasChildren() && !visited.containsKey(node)) {
+                var ch = node.getChildren();
+                for (var child : reverse(getSecondHalf(ch))) {
+                    stack.push(child);
+                }
+
+                visited.put(node, true);
+
+                stack.push(node);
+                for (var child : reverse(getFirstHalf(ch))) {
+                    stack.push(child);
+                }
+            } else {
+                System.out.println(node.getValue());
+            }
+        }
+    }
+
+    private static <T> List<TreeNode<T>> getFirstHalf(List<TreeNode<T>> in) {
+        var out = new ArrayList<TreeNode<T>>();
+
+        for (int i = 0; i < in.size() / 2; i++) {
+            out.add(in.get(i));
+        }
+
+        return out;
+    }
+
+    private static <T> List<TreeNode<T>> getSecondHalf(List<TreeNode<T>> in) {
+        var out = new ArrayList<TreeNode<T>>();
+
+        for (int i = in.size() / 2; i < in.size(); i++) {
+            out.add(in.get(i));
+        }
+
+        return out;
+    }
+
+    public static <T> void levelOrderTraverse(TreeNode<T> root) {
+        var q = new ArrayDeque<TreeNode<T>>();
+        q.add(root);
+
+        while (q.size() > 0) {
+            var node = q.poll();
+            System.out.println(node.getValue());
+
+            for (var child : node.getChildren()) {
+                q.add(child);
+            }
         }
     }
 
