@@ -144,4 +144,42 @@ public class TreeUtils {
     }
 
     // endregion iteratively
+
+    // region helpers
+
+    public static <T> TreeNode<T> parse(T[] in) {
+        var nodes = new HashMap<Integer, TreeNode<T>>();
+        createNodes(in, nodes);
+        createHierarchy(in, nodes);
+        return nodes.get(0);
+    }
+
+    private static <T> void createNodes(T[] in, HashMap<Integer, TreeNode<T>> nodes) {
+        for (var i = 0; i< in.length; i++) {
+            var node = new TreeNode<>(in[i], new ArrayList<>(2));
+            nodes.put(i, node);
+        }
+    }
+
+    private static <T> void createHierarchy(T[] in, HashMap<Integer, TreeNode<T>> nodes) {
+        var shiftToChildren = 1;
+        for (var i = 0; i < in.length; i++) {
+            if (in[i] != null) {
+                var node = nodes.get(i);
+                var firstChildIndex = i + shiftToChildren;
+                if (firstChildIndex < in.length) {
+                    var children = node.getChildren();
+                    var firstChild = nodes.get(firstChildIndex);
+                    var secondChild = nodes.get(firstChildIndex + 1);
+                    children.add(firstChild);
+                    children.add(secondChild);
+                    shiftToChildren++;
+                } else {
+                    return;
+                }
+            }
+        }
+    }
+
+    // endregion helpers
 }
