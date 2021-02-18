@@ -1,5 +1,6 @@
-package dbelousov.petprojects.collections;
+package dbelousov.petprojects.util;
 
+import dbelousov.petprojects.util.StringAppender;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;

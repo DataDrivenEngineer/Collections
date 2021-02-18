@@ -1,4 +1,4 @@
-package dbelousov.petprojects.collections;
+package dbelousov.petprojects.collections.hashtable;
 
 import dbelousov.petprojects.collections.hashtable.HashTable;
 import org.junit.jupiter.api.BeforeEach;

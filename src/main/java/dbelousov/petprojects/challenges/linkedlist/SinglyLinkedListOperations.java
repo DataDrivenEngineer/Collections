@@ -1,10 +1,10 @@
-package dbelousov.petprojects.challenges;
+package dbelousov.petprojects.challenges.linkedlist;
 
-import dbelousov.petprojects.collections.UnidirectionalNode;
+import dbelousov.petprojects.collections.linkedlist.UnidirectionalNode;
 
 import java.util.ArrayDeque;
 
-public class LinkedListReverser {
+public class SinglyLinkedListOperations {
 
     public UnidirectionalNode<?> reverseLinkedListRecursively(UnidirectionalNode<?> head) {
         return reverseLinkedListRecursivelyHelper(head);

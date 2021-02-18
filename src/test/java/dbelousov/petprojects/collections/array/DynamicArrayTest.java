@@ -1,5 +1,6 @@
-package dbelousov.petprojects.collections;
+package dbelousov.petprojects.collections.array;
 
+import dbelousov.petprojects.collections.array.DynamicArray;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
