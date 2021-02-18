@@ -12,6 +12,6 @@ class SortUtilsTest {
     void testQuickSort() {
         var in = new Integer[] { 7, 5, 1, 5, 4, 6, 3, 5, 17, 85, -76 };
         SortUtils.quickSort(in);
-        System.out.println(Arrays.toString(in));
+        assertEquals("[-76, 1, 3, 4, 5, 5, 5, 6, 7, 17, 85]", Arrays.toString(in));
     }
 }
