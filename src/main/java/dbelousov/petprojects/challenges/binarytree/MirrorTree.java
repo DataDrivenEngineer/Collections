@@ -10,7 +10,7 @@ import java.util.Deque;
 public class MirrorTree {
 
     public static <T> boolean isMirrorTree(T[] in) {
-        var root = TreeUtils.parse(in);
+        var root = TreeUtils.toTree(in);
 
         var q = new ArrayDeque<TreeNode<T>>();
         if (root != null) {

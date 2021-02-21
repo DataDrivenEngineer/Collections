@@ -1,5 +1,6 @@
 package dbelousov.petprojects.collections.binarytree;
 
+import java.lang.reflect.Array;
 import java.util.*;
 
 public class TreeUtils {
@@ -147,7 +148,7 @@ public class TreeUtils {
 
     // region helpers
 
-    public static <T> TreeNode<T> parse(T[] in) {
+    public static <T> TreeNode<T> toTree(T[] in) {
         var nodes = new HashMap<Integer, TreeNode<T>>();
         createNodes(in, nodes);
         createHierarchy(in, nodes);
@@ -179,6 +180,43 @@ public class TreeUtils {
                 }
             }
         }
+    }
+
+    public static <T> T[] toArray(TreeNode<T> root) {
+        if (root == null) {
+            return null;
+        }
+
+        var arrSize = getTotalNodes(root);
+        var arr = new ArrayList<T>(arrSize);
+
+        var queue = new ArrayDeque<TreeNode<T>>();
+        queue.add(root);
+        while (queue.size() > 0) {
+            var node = queue.poll();
+            arr.add(node.getValue());
+            for (var child : node.getChildren()) {
+                queue.add(child);
+            }
+        }
+
+        var retArr = (T[]) Array.newInstance(arr.get(0).getClass(), arr.size());
+        return arr.toArray(retArr);
+    }
+
+    private static <T> int getTotalNodes(TreeNode<T> root) {
+        var totalNodes = 0;
+        return countByPreOrderTraverse(root, totalNodes);
+    }
+
+    private static <T> int countByPreOrderTraverse(TreeNode<T> root, int totalNodes) {
+        if (root != null) {
+            totalNodes++;
+            for (var child : root.getChildren()) {
+                countByPreOrderTraverse(child, totalNodes);
+            }
+        }
+        return totalNodes;
     }
 
     // endregion helpers

@@ -9,7 +9,7 @@ public class MaxDepth {
     public static <T> int getDepth(T[] input) {
         depth = 0;
 
-        var root = TreeUtils.parse(input);
+        var root = TreeUtils.toTree(input);
         if (root != null) {
             preOrderTraverse(root);
         }
