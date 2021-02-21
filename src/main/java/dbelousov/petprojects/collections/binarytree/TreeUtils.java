@@ -219,5 +219,31 @@ public class TreeUtils {
         return totalNodes;
     }
 
+    public static <T extends Comparable<T>> TreeNode<T> toBst(T[] in) {
+        if (in == null || in.length == 0) {
+            return null;
+        }
+        return toBstInternal(in, null, 0, in.length);
+    }
+
+    private static <T extends Comparable<T>> TreeNode<T> toBstInternal(T[] in, TreeNode<T> root, int start, int end) {
+        if (end - start > 2) {
+            var mid = (end + start) / 2;
+            root = new TreeNode<>(in[mid], new ArrayList<>(2));
+            var leftChild = toBstInternal(in, root, start, mid);
+            var rightChild = toBstInternal(in, root, mid + 1, end);
+            root.getChildren().addAll(Arrays.asList(leftChild, rightChild));
+            return root;
+        } else if (end - start == 2) {
+            var localChild = new TreeNode<>(in[start], new ArrayList<>(2));
+            var localRoot = new TreeNode<>(in[end - 1], new ArrayList<>(2));
+            localRoot.getChildren().add(0, localChild);
+            return localRoot;
+        } else {
+            var localRoot = new TreeNode<>(in[start], new ArrayList<>(2));
+            return localRoot;
+        }
+    }
+
     // endregion helpers
 }
