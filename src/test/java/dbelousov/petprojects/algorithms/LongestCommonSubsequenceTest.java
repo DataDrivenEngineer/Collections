@@ -1,5 +1,6 @@
 package dbelousov.petprojects.algorithms;
 
+import dbelousov.petprojects.algorithms.dynamicprogramming.LongestCommonSubsequence;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 

@@ -1,4 +1,4 @@
-package dbelousov.petprojects.algorithms;
+package dbelousov.petprojects.algorithms.dynamicprogramming;
 
 import java.util.HashMap;
 import java.util.Map;
