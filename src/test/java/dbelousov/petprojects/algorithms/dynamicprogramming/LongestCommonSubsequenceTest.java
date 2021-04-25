@@ -1,4 +1,4 @@
-package dbelousov.petprojects.algorithms;
+package dbelousov.petprojects.algorithms.dynamicprogramming;
 
 import dbelousov.petprojects.algorithms.dynamicprogramming.LongestCommonSubsequence;
 import org.junit.jupiter.api.BeforeEach;
