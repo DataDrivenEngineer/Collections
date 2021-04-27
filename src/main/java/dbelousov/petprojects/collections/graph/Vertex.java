@@ -6,6 +6,7 @@ public class Vertex<T> {
 
     private int discoveryTime;
     private int finalizationTime;
+    private boolean isFinalized = false;
     private T val;
 
     public Vertex(T val) {
@@ -26,6 +27,14 @@ public class Vertex<T> {
 
     public void setFinalizationTime(int finalizationTime) {
         this.finalizationTime = finalizationTime;
+    }
+
+    public boolean isFinalized() {
+        return isFinalized;
+    }
+
+    public void setFinalized(boolean finalized) {
+        isFinalized = finalized;
     }
 
     public T getVal() {
