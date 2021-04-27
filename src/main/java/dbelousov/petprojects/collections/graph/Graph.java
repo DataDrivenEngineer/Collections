@@ -1,15 +1,17 @@
 package dbelousov.petprojects.collections.graph;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 
-public class Graph {
+public class Graph<T> {
 
-    private Integer vertices;
-    private final List<LinkedList<Integer>> adjacencyList;
+    private final List<Vertex<T>> vertices;
+    private final List<LinkedList<Vertex<T>>> adjacencyList;
 
-    public Graph(Integer vertices, List<LinkedList<Integer>> adjacencyList) {
-        this.vertices = vertices;
+    public Graph(List<Vertex<T>> vertices, List<LinkedList<Vertex<T>>> adjacencyList) {
+        this.vertices = new ArrayList<>(vertices);
         this.adjacencyList = new LinkedList<>();
         for (var adjEdges : adjacencyList) {
             var list = new LinkedList<>(adjEdges);
@@ -17,11 +19,11 @@ public class Graph {
         }
     }
 
-    public Integer getVertices() {
-        return vertices;
+    public List<Vertex<T>> getVertices() {
+        return Collections.unmodifiableList(vertices);
     }
 
-    public List<LinkedList<Integer>> getAdjacencyList() {
-        return adjacencyList;
+    public List<LinkedList<Vertex<T>>> getAdjacencyList() {
+        return Collections.unmodifiableList(adjacencyList);
     }
 }

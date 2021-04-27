@@ -1,25 +1,30 @@
 package dbelousov.petprojects.algorithms.graph;
 
 import dbelousov.petprojects.collections.graph.Graph;
+import dbelousov.petprojects.collections.graph.Vertex;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
-public class DfsTraversal {
+public class DfsTraversal<T> {
 
-    public void traverse(Graph g) {
-        for (var i = 1; i <= g.getVertices(); i++) {
-            dfsHelper(g, i, new HashSet<>());
+    public List<T> traverse(Graph<T> g) {
+        var out = new ArrayList<T>();
+        for (var vertex : g.getVertices()) {
+            dfsHelper(out, g, vertex, new HashSet<>());
         }
+        return out;
     }
 
-    private void dfsHelper(Graph g, int v, Set<Integer> visited) {
+    private void dfsHelper(List<T> out, Graph<T> g, Vertex<T> v, Set<Vertex<T>> visited) {
         if (!visited.contains(v)) {
-            System.out.println(v);
+            out.add(v.getVal());
             visited.add(v);
-            var adjacentEdges = g.getAdjacencyList().get(v - 1);
+            var adjacentEdges = g.getAdjacencyList().get(g.getVertices().indexOf(v));
             for (var adjacentEdge : adjacentEdges) {
-                dfsHelper(g, adjacentEdge, visited);
+                dfsHelper(out, g, adjacentEdge, visited);
             }
         }
     }

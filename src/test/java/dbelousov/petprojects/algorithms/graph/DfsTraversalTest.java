@@ -4,36 +4,24 @@ import dbelousov.petprojects.collections.graph.Graph;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import java.util.Arrays;
-import java.util.LinkedList;
-
 import static org.junit.jupiter.api.Assertions.*;
 
 class DfsTraversalTest {
-    private Graph g;
+    private Graph<Integer> g;
 
     @BeforeEach
     void setUp() {
-        var numOfVertices = 6;
-        var firstV = new LinkedList<>(Arrays.asList(2, 4));
-        var secondV = new LinkedList<>(Arrays.asList(5));
-        var thirdV = new LinkedList<>(Arrays.asList(5, 6));
-        var fourthV = new LinkedList<>(Arrays.asList(2));
-        var fifthV = new LinkedList<>(Arrays.asList(4));
-        var sixthV = new LinkedList<>(Arrays.asList(6));
-        var adjacencyList = new LinkedList<LinkedList<Integer>>();
-        adjacencyList.add(firstV);
-        adjacencyList.add(secondV);
-        adjacencyList.add(thirdV);
-        adjacencyList.add(fourthV);
-        adjacencyList.add(fifthV);
-        adjacencyList.add(sixthV);
-        g = new Graph(numOfVertices, adjacencyList);
+        var vertices = new Integer[]{1,2,3,4,5,6};
+        var edges = new Integer[][]{
+                {2,4}, {5}, {5,6}, {2}, {4}, {6}
+        };
+        g = GraphUtils.makeGraph(vertices, edges);
     }
 
     @Test
     void testBfsTraversal() {
         var dfsTraversal = new DfsTraversal();
-        dfsTraversal.traverse(g);
+        var out = dfsTraversal.traverse(g);
+        assertArrayEquals(new Integer[]{1, 2, 5, 4, 2, 5, 4, 3, 5, 4, 2, 6, 4, 2, 5, 5, 4, 2, 6}, out.toArray());
     }
 }

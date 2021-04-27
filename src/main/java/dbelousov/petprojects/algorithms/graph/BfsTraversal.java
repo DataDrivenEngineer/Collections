@@ -1,23 +1,27 @@
 package dbelousov.petprojects.algorithms.graph;
 
 import dbelousov.petprojects.collections.graph.Graph;
+import dbelousov.petprojects.collections.graph.Vertex;
 
 import java.util.ArrayDeque;
+import java.util.ArrayList;
 import java.util.List;
 
-public class BfsTraversal {
+public class BfsTraversal<T> {
 
-    public void traverse(Graph g) {
-        var q = new ArrayDeque<List<Integer>>();
+    public List<T> traverse(Graph<T> g) {
+        var out = new ArrayList<T>();
+        var q = new ArrayDeque<List<Vertex<T>>>();
         q.addAll(g.getAdjacencyList());
-        var currVertice = 1;
+        var sourceVertexIndex = 0;
         while (!q.isEmpty()) {
-            System.out.println(currVertice);
-            var edges = q.poll();
-            for (var edge : edges) {
-                System.out.println(edge);
+            out.add(g.getVertices().get(sourceVertexIndex).getVal());
+            var adjacentVertices = q.poll();
+            for (var adjacentVertex : adjacentVertices) {
+                out.add(adjacentVertex.getVal());
             }
-            currVertice++;
+            sourceVertexIndex++;
         }
+        return out;
     }
 }
