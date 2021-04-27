@@ -28,4 +28,24 @@ public class GraphUtils {
 
         return new Graph<>(listOfVertices, adjacencyList);
     }
+
+    public static <T> Graph<T> transposeGraph(Graph<T> g) {
+        var newAdjacencyList = new ArrayList<LinkedList<Vertex<T>>>();
+        var i = 0;
+        while (i < g.getVertices().size()) {
+            newAdjacencyList.add(new LinkedList<>());
+            i++;
+        }
+
+        var originalAdjacencyList = g.getAdjacencyList();
+        for (i = 0; i < originalAdjacencyList.size(); i++) {
+            var sourceVertex = g.getVertices().get(i);
+            for (var targetVertex : originalAdjacencyList.get(i)) {
+                var newAdjacencyListOfTargetVertex = newAdjacencyList.get(g.getVertices().indexOf(targetVertex));
+                newAdjacencyListOfTargetVertex.add(sourceVertex);
+            }
+        }
+
+        return new Graph<>(g.getVertices(), newAdjacencyList);
+    }
 }

@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class BfsTraversalTest {
+class GraphUtilsTest {
     private Graph<Integer> g;
 
     @BeforeEach
@@ -19,9 +19,10 @@ class BfsTraversalTest {
     }
 
     @Test
-    void testBfsTraversal() {
-        var bfsTraversal = new BfsTraversal();
-        var out = bfsTraversal.basicTraverse(g);
-        assertArrayEquals(new Integer[]{1,2,4,2,5,3,5,6,4,2,5,4,6,6}, out.toArray());
+    void testTransposeGraph() {
+        var bfsTraversal = new BfsTraversal<Integer>();
+        var transposedGraph = GraphUtils.transposeGraph(g);
+        var out = bfsTraversal.basicTraverse(transposedGraph);
+        assertArrayEquals(new Integer[]{1,2,1,4,3,4,1,5,5,2,3,6,3,6}, out.toArray());
     }
 }

@@ -9,7 +9,7 @@ import java.util.List;
 
 public class BfsTraversal<T> {
 
-    public List<T> traverse(Graph<T> g) {
+    public List<T> basicTraverse(Graph<T> g) {
         var out = new ArrayList<T>();
         var q = new ArrayDeque<List<Vertex<T>>>();
         q.addAll(g.getAdjacencyList());
