@@ -7,7 +7,7 @@ import java.util.List;
 
 public class Graph<T> {
 
-    private final List<Vertex<T>> vertices;
+    private List<Vertex<T>> vertices;
     private final List<LinkedList<Vertex<T>>> adjacencyList;
 
     public Graph(List<Vertex<T>> vertices, List<LinkedList<Vertex<T>>> adjacencyList) {
@@ -21,6 +21,10 @@ public class Graph<T> {
 
     public List<Vertex<T>> getVertices() {
         return Collections.unmodifiableList(vertices);
+    }
+
+    public void setVertices(List<Vertex<T>> vertices) {
+        this.vertices = new ArrayList<>(vertices);
     }
 
     public List<LinkedList<Vertex<T>>> getAdjacencyList() {
