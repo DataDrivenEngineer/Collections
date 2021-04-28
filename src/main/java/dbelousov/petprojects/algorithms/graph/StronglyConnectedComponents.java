@@ -59,6 +59,9 @@ public class StronglyConnectedComponents<T> {
 
             if (isBasicDfs) {
                 v.setFinalizationTime(time);
+                /* Eventually, the stack will contain all vertices topologically sorted.
+                 * This is a prerequisite for splitting the graph into strongly connected components
+                 */
                 stack.push(v);
                 time += 1;
             }
